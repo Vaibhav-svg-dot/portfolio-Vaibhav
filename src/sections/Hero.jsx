@@ -74,8 +74,9 @@ function FallingCodeColumn({ items, className = '', speed = 'normal', delay = '0
   );
 }
 
-export default function Hero() {
-  const [headlineTyped, setHeadlineTyped] = useState('');
+export default function Hero() { 
+  const [headlineTyped, setHeadlineTyped] = useState(''); 
+  const [imageLoaded, setImageLoaded] = useState(true);
   const [headlineDone, setHeadlineDone] = useState(false);
 
   const [typedCmd, setTypedCmd] = useState('');
