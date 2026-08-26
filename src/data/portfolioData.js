@@ -9,8 +9,8 @@ export const personalInfo = {
   role: "Digital Executive & Full-Stack Developer",
   status: "Available for Digital Initiatives & Collaborations",
   location: "Navi Mumbai, India",
-  profileImage: "/images/profile.png",
-fallbackImage: "/images/profile.jpg",
+  profileImage: "/images/profile.jpeg",
+fallbackImage: "/images/profile.png",
   hero: {
     greeting: "Hi, I'm",
     nameHighlight: "Vaibhav Gaikwad",

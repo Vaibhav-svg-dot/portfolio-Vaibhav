@@ -111,6 +111,7 @@ export default function Hero() {
 
   const heroPrefix = `${personalInfo.hero.greeting} `;
   const heroFullText = `${heroPrefix}${personalInfo.hero.nameHighlight}`;
+  
 
   useEffect(() => {
     if (headlineTyped.length < heroFullText.length) {
