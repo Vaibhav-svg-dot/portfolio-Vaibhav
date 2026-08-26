@@ -84,14 +84,14 @@ export default function Projects() {
                       href={project.links.github}
                       onClick={(e) => project.links.github === '#' && e.preventDefault()}
                       className="px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/40 text-xs font-mono text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors"
-                      title={project.links.github === '#' ? 'Repository placeholder' : 'View GitHub'}
+                      title={project.links.github === 'https://github.com/Vaibhav-svg-dot/portfolio-Vaibhav.git' ? 'Repository placeholder' : 'View GitHub'}
                     >
                       <Github className="w-3.5 h-3.5 text-purple-400" />
                       <span>Code Repo</span>
                     </a>
                     <a
                       href={project.links.live}
-                      onClick={(e) => project.links.live === '#' && e.preventDefault()}
+                      onClick={(e) => project.links.live === 'https://www.linkedin.com/in/vaibhav-gaikwad-42b7583b9?utm_source=share_via&utm_content=profile&utm_medium=member_android' && e.preventDefault()}
                       className="px-3.5 py-1.5 rounded-xl cyber-btn-primary text-xs font-mono text-white flex items-center gap-1.5"
                       title={project.links.live === '#' ? 'Live deployment placeholder' : 'View Live Demo'}
                     >
