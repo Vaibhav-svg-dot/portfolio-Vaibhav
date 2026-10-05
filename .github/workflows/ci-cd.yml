@@ -1,0 +1,77 @@
+# CI/CD pipeline for the portfolio website
+# CI  = automatically install + build + check the project on every push / pull request
+# CD  = automatically publish the built site to GitHub Pages when code lands on main
+
+name: CI/CD Pipeline
+
+# WHEN does this pipeline run?
+on:
+  push:
+    branches: [main]        # every push to main  -> CI + CD
+  pull_request:
+    branches: [main]        # every pull request  -> CI only (no deploy)
+  workflow_dispatch:        # lets you click "Run workflow" manually in GitHub
+
+# Permissions GitHub Pages needs to publish the site
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# If you push twice quickly, cancel the older run
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # ---------------------------------------------------------------
+  # JOB 1: CI - build and verify
+  # ---------------------------------------------------------------
+  build:
+    name: Build & Verify
+    runs-on: ubuntu-latest   # a fresh Linux machine GitHub gives you for free
+
+    steps:
+      - name: Download the code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm           # re-use downloaded packages -> faster runs
+
+      - name: Install dependencies
+        run: npm ci            # exact versions from package-lock.json
+
+      - name: Build the site
+        run: npm run build     # creates the /dist folder
+
+      - name: Check build output exists
+        run: |
+          test -f dist/index.html || (echo "Build failed: dist/index.html missing" && exit 1)
+          echo "Build OK. Files in dist:"
+          ls -la dist
+
+      - name: Upload build for deployment
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  # ---------------------------------------------------------------
+  # JOB 2: CD - deploy to GitHub Pages (only from main)
+  # ---------------------------------------------------------------
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build             # only runs if the build job succeeded
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
