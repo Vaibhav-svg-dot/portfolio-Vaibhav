@@ -247,7 +247,7 @@ export const skillsCategories = [
     skills: [
       { name: "Servlets", icon: "server", color: "#a855f7" },
       { name: "JDBC", icon: "database", color: "#3b82f6" },
-      { name: "OOP", icon: "cpu", color: "#06b6d4" },
+      { name: "OOPS", icon: "cpu", color: "#06b6d4" },
       { name: "Collections", icon: "layers", color: "#c084fc" },
       { name: "Exception Handling", icon: "shield", color: "#f59e0b" },
       { name: "Problem Solving", icon: "sparkles", color: "#10b981" },
